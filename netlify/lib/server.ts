@@ -52,7 +52,7 @@ export async function planFor(userId: string): Promise<{ tier: Tier; trial: bool
 }
 
 export function siteUrl(req: Request) {
-  return process.env.URL || new URL(req.url).origin;
+  return process.env.APP_URL || process.env.URL || new URL(req.url).origin;
 }
 
 export function handleError(err: unknown) {

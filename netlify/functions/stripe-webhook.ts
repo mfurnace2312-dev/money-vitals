@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { adminClient, env, json } from "../lib/server";
-import { stripeEnv } from "../lib/stripe";
+import { priceFor, stripeEnv } from "../lib/stripe";
 
 const toIso = (s?: number | null) => (s ? new Date(s * 1000).toISOString() : null);
 
@@ -51,7 +51,7 @@ export default async (req: Request) => {
     }
 
     const priceId = sub.items.data[0]?.price.id;
-    const tier = priceId === process.env.STRIPE_PRICE_PREMIUM ? "premium" : priceId === process.env.STRIPE_PRICE_PLUS ? "plus" : (sub.metadata?.tier as string) || "plus";
+    const tier = priceId === priceFor("premium") ? "premium" : priceId === priceFor("plus") ? "plus" : (sub.metadata?.tier as string) || "plus";
     const item = sub.items.data[0] as Stripe.SubscriptionItem & { current_period_start?: number; current_period_end?: number };
     const legacy = sub as Stripe.Subscription & { current_period_start?: number; current_period_end?: number };
 
@@ -84,4 +84,5 @@ export default async (req: Request) => {
   }
 };
 
-export const config = { path: "/api/stripe-webhook" };
+// "/api/public/payments/webhook" is the address already registered in Stripe.
+export const config = { path: ["/api/stripe-webhook", "/api/public/payments/webhook"] };

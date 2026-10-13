@@ -31,8 +31,8 @@ Every push to `main` on GitHub deploys automatically to Netlify.
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API Keys → secret / service_role key. **Server only.** |
 | `ANTHROPIC_API_KEY` | console.anthropic.com → API Keys |
 | `STRIPE_SECRET_KEY` | Stripe → Developers → API keys |
-| `STRIPE_PRICE_PLUS` / `STRIPE_PRICE_PREMIUM` | Stripe → Product catalog → each plan's monthly price ID (`price_…`) |
-| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → endpoint `https://<site>/api/stripe-webhook` → signing secret |
+| `STRIPE_PLUS_PRICE_ID` / `STRIPE_PREMIUM_PRICE_ID` | Stripe → Product catalog → each plan's monthly price ID (`price_…`) |
+| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → endpoint `https://<site>/api/public/payments/webhook` → signing secret |
 
 Webhook events to send: `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.paid`, `invoice.payment_failed`.
 

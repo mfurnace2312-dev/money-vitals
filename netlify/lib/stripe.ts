@@ -18,3 +18,10 @@ export async function customerFor(stripe: Stripe, userId: string, email: string 
   }
   return customer.id;
 }
+
+/** Monthly price ID for a plan. Accepts either naming style for the Netlify setting. */
+export function priceFor(tier: "plus" | "premium") {
+  return tier === "plus"
+    ? process.env.STRIPE_PLUS_PRICE_ID || process.env.STRIPE_PRICE_PLUS || ""
+    : process.env.STRIPE_PREMIUM_PRICE_ID || process.env.STRIPE_PRICE_PREMIUM || "";
+}

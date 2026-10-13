@@ -1,6 +1,6 @@
 import Stripe from "stripe";
-import { adminClient, env, handleError, json, requireUser, siteUrl } from "../lib/server";
-import { customerFor, stripeEnv } from "../lib/stripe";
+import { adminClient, ConfigError, env, handleError, json, requireUser, siteUrl } from "../lib/server";
+import { customerFor, priceFor, stripeEnv } from "../lib/stripe";
 
 export default async (req: Request) => {
   if (req.method !== "POST") return json(405, { error: "Use POST." });
@@ -13,7 +13,8 @@ export default async (req: Request) => {
     if (tier !== "plus" && tier !== "premium") return json(400, { error: "Pick Plus or Premium." });
 
     const key = env("STRIPE_SECRET_KEY");
-    const price = env(tier === "plus" ? "STRIPE_PRICE_PLUS" : "STRIPE_PRICE_PREMIUM");
+    const price = priceFor(tier);
+    if (!price) return handleError(new ConfigError(`Stripe price for ${tier} is missing (STRIPE_${tier.toUpperCase()}_PRICE_ID).`));
     const environment = stripeEnv(key);
     const stripe = new Stripe(key);
     const db = adminClient();
@@ -35,6 +36,7 @@ export default async (req: Request) => {
         customer,
         line_items: [{ price, quantity: 1 }],
         allow_promotion_codes: true,
+        automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === "true" },
         client_reference_id: user.id,
         subscription_data: { metadata: { user_id: user.id, tier } },
         metadata: { user_id: user.id, tier },
