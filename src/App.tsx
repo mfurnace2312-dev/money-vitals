@@ -43,8 +43,8 @@ function NotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <p className="eyebrow">404</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold">That page doesn't exist</h1>
-      <a href="/" className="mt-6 text-sm font-semibold text-vital-600 hover:underline">Go to the home page</a>
+      <h1 className="mt-2 font-display text-5xl">That page doesn't exist</h1>
+      <a href="/" className="mt-6 text-sm font-semibold text-pulse-500 hover:underline">Go to the home page</a>
     </div>
   );
 }

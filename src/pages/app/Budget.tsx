@@ -24,7 +24,7 @@ function Section({ kind, rows }: { kind: Kind; rows: BudgetEntry[] }) {
 
   return (
     <Card pad={false}>
-      <div className="grid grid-cols-[1fr_100px_100px_32px] items-center gap-2 border-b border-paper-line px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-mute sm:grid-cols-[1fr_130px_130px_36px] sm:px-6">
+      <div className="grid grid-cols-[1fr_100px_100px_32px] items-center gap-2 border-b border-paper-line px-4 py-3 text-sm font-bold text-ink-soft sm:grid-cols-[1fr_130px_130px_36px] sm:px-6">
         <span>{kind === "income" ? "Income" : "Expenses"}</span>
         <span className="text-right">Planned</span>
         <span className="text-right">Actual</span>
@@ -111,7 +111,7 @@ export default function Budget() {
 
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[["Income", money(s.income)], ["Spending", money(s.expenses)], ["Bills & debt", money(s.bills + s.debtPayments)], ["Left after all", money(s.moneyLeft)]].map(([k, v], i) => (
-          <div key={k} className="rounded-xl border border-paper-line bg-white px-4 py-3">
+          <div key={k} className="rounded-2xl border-2 border-ink/[.06] bg-white px-4 py-3">
             <div className="eyebrow">{k}</div>
             <div className={cx("num mt-1 text-xl font-semibold", i === 3 && s.moneyLeft < 0 && "text-alert-500")}>{v}</div>
           </div>

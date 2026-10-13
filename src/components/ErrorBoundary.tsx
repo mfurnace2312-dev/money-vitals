@@ -23,9 +23,9 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, State> {
     return (
       <div className="flex min-h-screen items-center justify-center px-6">
         <div className="max-w-md text-center">
-          <h1 className="font-display text-3xl font-semibold">Something went wrong</h1>
+          <h1 className="font-display text-4xl">Something went wrong</h1>
           <p className="mt-2 text-sm text-ink-mute">The page hit an unexpected error. Reloading usually fixes it.</p>
-          <button onClick={() => window.location.reload()} className="mt-6 rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-white">Reload</button>
+          <button onClick={() => window.location.reload()} className="mt-6 rounded-full bg-pulse-500 px-5 py-2.5 text-sm font-bold text-white">Reload</button>
         </div>
       </div>
     );

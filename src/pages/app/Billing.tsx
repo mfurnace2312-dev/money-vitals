@@ -98,7 +98,7 @@ export default function Billing() {
                 {isCurrent && <Badge tone="good">Current</Badge>}
               </div>
               <p className="mt-1 text-sm text-ink-mute">{p.tagline}</p>
-              <div className="mt-5 flex items-baseline gap-1"><span className="num font-display text-4xl font-semibold">${p.price}</span><span className="text-sm text-ink-mute">/month</span></div>
+              <div className="mt-5 flex items-baseline gap-1"><span className="num font-display text-5xl">${p.price}</span><span className="text-sm text-ink-mute">/month</span></div>
               <ul className="mt-5 flex-1 space-y-2.5 text-sm">
                 {p.features.map((f) => <li key={f} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-vital-600" />{f}</li>)}
               </ul>

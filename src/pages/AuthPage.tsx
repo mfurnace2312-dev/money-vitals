@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { MailCheck } from "lucide-react";
 import { supabase, friendlyError } from "@/lib/supabase";
 import { useAuth } from "@/hooks/useAuth";
-import { Logo } from "@/components/brand";
+import { Ecg, Logo } from "@/components/brand";
 import { Alert, Button, Field, Input, Spinner } from "@/components/ui";
 
 type Mode = "signin" | "signup" | "forgot" | "reset";
@@ -117,8 +117,8 @@ export default function AuthPage({ initial }: { initial: Mode }) {
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-10">
           {sentTo ? (
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-vital-50 text-vital-600"><MailCheck className="h-6 w-6" /></div>
-              <h1 className="font-display text-3xl font-semibold">Check your email</h1>
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-pulse-50 text-pulse-500"><MailCheck className="h-6 w-6" /></div>
+              <h1 className="font-display text-4xl">Check your email</h1>
               <p className="mt-2 text-sm text-ink-mute">We sent a confirmation link to <strong className="text-ink">{sentTo}</strong>. Click it to finish setting up your account.</p>
               {info && <div className="mt-4"><Alert tone="info">{info}</Alert></div>}
               <div className="mt-6 flex flex-col gap-2">
@@ -128,7 +128,7 @@ export default function AuthPage({ initial }: { initial: Mode }) {
             </div>
           ) : (
             <>
-              <h1 className="font-display text-3xl font-semibold">{heading}</h1>
+              <h1 className="font-display text-4xl">{heading}</h1>
               <p className="mt-2 text-sm text-ink-mute">{sub}</p>
 
               {google && (mode === "signin" || mode === "signup") && (
@@ -163,12 +163,12 @@ export default function AuthPage({ initial }: { initial: Mode }) {
               <div className="mt-6 space-y-2 text-center text-sm text-ink-mute">
                 {mode === "signin" && (
                   <>
-                    <button onClick={() => setMode("forgot")} className="font-medium text-ink hover:underline">Forgot password?</button>
-                    <div>New here? <Link to="/signup" className="font-semibold text-vital-600 hover:underline">Create an account</Link></div>
+                    <button onClick={() => setMode("forgot")} className="font-semibold text-pulse-500 hover:underline">Forgot password?</button>
+                    <div>New here? <Link to="/signup" className="font-semibold text-pulse-500 hover:underline">Create an account</Link></div>
                   </>
                 )}
-                {mode === "signup" && <div>Already have an account? <Link to="/signin" className="font-semibold text-vital-600 hover:underline">Sign in</Link></div>}
-                {mode === "forgot" && <button onClick={() => setMode("signin")} className="font-medium text-ink hover:underline">Back to sign in</button>}
+                {mode === "signup" && <div>Already have an account? <Link to="/signin" className="font-semibold text-pulse-500 hover:underline">Sign in</Link></div>}
+                {mode === "forgot" && <button onClick={() => setMode("signin")} className="font-semibold text-pulse-500 hover:underline">Back to sign in</button>}
               </div>
               {mode === "signup" && (
                 <p className="mt-6 text-center text-xs text-ink-mute">By creating an account you agree to the <Link to="/terms" className="underline">Terms</Link> and <Link to="/privacy" className="underline">Privacy Notice</Link>.</p>
@@ -178,14 +178,17 @@ export default function AuthPage({ initial }: { initial: Mode }) {
         </div>
       </div>
 
-      <div className="relative hidden overflow-hidden bg-ink lg:block">
-        <div className="grid-paper absolute inset-0 opacity-[.35] [filter:invert(1)]" />
-        <div className="relative flex h-full flex-col justify-end p-12 text-white">
-          <svg viewBox="0 0 400 120" className="mb-10 w-full max-w-md" aria-hidden>
-            <path d="M0 70h80l20-40 34 78 26-56 18 22h222" fill="none" stroke="#3BAA6E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <p className="font-display text-3xl leading-tight">"Every number, calculated. Every next step, clear."</p>
-          <p className="mt-4 max-w-md text-sm text-white/60">Income, bills, debt and savings in one place — with real debt-to-income math and an advisor that reads your actual budget.</p>
+      <div className="relative hidden overflow-hidden bg-pulse-500 lg:block">
+        <div className="relative flex h-full flex-col justify-between p-12 text-white">
+          <p className="max-w-md font-display text-6xl">{mode === "signup" ? "Let's take your first reading." : "Welcome back to your numbers."}</p>
+          <div>
+            <Ecg draw className="h-28 w-full text-white" width={3.5} />
+            <ul className="mt-8 space-y-3 text-[15px] text-white/80">
+              <li className="flex gap-3"><span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-gold-400" />Real debt-to-income math, the way lenders calculate it</li>
+              <li className="flex gap-3"><span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-vital-400" />A payoff plan with your actual debt-free date</li>
+              <li className="flex gap-3"><span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-white" />An advisor that answers with your own numbers</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

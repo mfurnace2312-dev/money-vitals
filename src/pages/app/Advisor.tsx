@@ -90,7 +90,7 @@ export default function Advisor() {
                 <p className="mt-1 max-w-sm text-sm text-ink-mute">The advisor reads the numbers you've entered, so the more complete your budget, the sharper the answers.</p>
                 <div className="mt-6 grid w-full max-w-xl gap-2 sm:grid-cols-2">
                   {STARTERS.map((s) => (
-                    <button key={s} onClick={() => send(s)} className="rounded-xl border border-paper-line bg-white px-4 py-3 text-left text-sm hover:border-ink/25">{s}</button>
+                    <button key={s} onClick={() => send(s)} className="rounded-2xl border-2 border-ink/[.06] bg-white px-4 py-3 text-left text-sm hover:border-ink/25">{s}</button>
                   ))}
                 </div>
               </div>
@@ -98,7 +98,7 @@ export default function Advisor() {
               msgs.map((m) => (
                 <div key={m.id} className={cx("flex", m.role === "user" ? "justify-end" : "justify-start")}>
                   <div className={cx("max-w-[85%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed",
-                    m.role === "user" ? "rounded-br-md bg-ink text-white" : "rounded-bl-md border border-paper-line bg-paper/60")}>
+                    m.role === "user" ? "rounded-br-md bg-pulse-500 text-white" : "rounded-bl-md bg-paper")}>
                     {m.role === "assistant" ? <Rich text={m.content} /> : m.content}
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function Advisor() {
             )}
             {sending && (
               <div className="flex justify-start">
-                <div className="rounded-2xl rounded-bl-md border border-paper-line bg-paper/60 px-4 py-3">
+                <div className="rounded-2xl rounded-bl-md bg-paper px-4 py-3">
                   <span className="inline-flex gap-1" aria-label="Advisor is thinking">
                     {[0, 1, 2].map((i) => <span key={i} className="h-2 w-2 animate-bounce rounded-full bg-ink-mute" style={{ animationDelay: `${i * 120}ms` }} />)}
                   </span>

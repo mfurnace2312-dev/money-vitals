@@ -30,9 +30,9 @@ export default function NetWorth() {
     <div className="space-y-6">
       <PageHeader title="Net worth" sub="What you own minus what you owe. Debts from Debt payoff are included automatically." />
 
-      <Card className="bg-ink text-white">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50">Net worth</div>
-        <div className={cx("num mt-1 font-display text-5xl font-semibold", nw.net < 0 && "text-[#F28B76]")}>{money(nw.net)}</div>
+      <Card className="border-0 bg-ink text-white">
+        <div className="text-sm font-medium text-white/70">Net worth</div>
+        <div className={cx("num mt-1 font-display text-6xl", nw.net < 0 && "text-alert-300")}>{money(nw.net)}</div>
         <div className="mt-5 flex flex-wrap gap-x-8 gap-y-2 border-t border-white/10 pt-4 text-sm">
           <div><span className="text-white/50">Assets </span><span className="num font-semibold">{money(nw.assets)}</span></div>
           <div><span className="text-white/50">Debts </span><span className="num font-semibold">{money(nw.debts)}</span></div>

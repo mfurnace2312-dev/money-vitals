@@ -75,7 +75,7 @@ export default function Debts() {
                 </div>
                 <div>
                   <div className="mb-1.5 flex justify-between text-xs font-semibold text-ink-soft"><span>Extra per month</span><span className="num text-ink">{money(extra)}</span></div>
-                  <input type="range" min={0} max={2000} step={25} value={extra} onChange={(e) => setExtra(Number(e.target.value))} className="w-full accent-[#1F8A55]" aria-label="Extra payment per month" />
+                  <input type="range" min={0} max={2000} step={25} value={extra} onChange={(e) => setExtra(Number(e.target.value))} className="w-full accent-[#3D2BFF]" aria-label="Extra payment per month" />
                   <p className="mt-1 text-xs text-ink-mute">
                     {strategy === "avalanche" ? "Snowball" : "Avalanche"} would take {other.months} months and cost {money(other.interest)} in interest
                     {other.interest > plan.interest ? ` — ${money(other.interest - plan.interest)} more.` : other.interest < plan.interest ? ` — ${money(plan.interest - other.interest)} less.` : "."}
@@ -88,12 +88,12 @@ export default function Debts() {
               <div className="h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={plan.timeline}>
-                    <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#1F8A55" stopOpacity={0.25} /><stop offset="1" stopColor="#1F8A55" stopOpacity={0} /></linearGradient></defs>
-                    <CartesianGrid vertical={false} stroke="#E6E2D8" />
-                    <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={11} stroke="#6B7872" interval="preserveStartEnd" minTickGap={30} />
-                    <YAxis tickLine={false} axisLine={false} fontSize={11} stroke="#6B7872" width={52} tickFormatter={(v) => (v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${v}`)} />
-                    <Tooltip formatter={(v) => money(Number(v))} contentStyle={{ borderRadius: 10, border: "1px solid #E6E2D8", fontSize: 13 }} />
-                    <Area type="monotone" dataKey="balance" name="Balance left" stroke="#1F8A55" strokeWidth={2.5} fill="url(#g)" />
+                    <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#3D2BFF" stopOpacity={0.25} /><stop offset="1" stopColor="#3D2BFF" stopOpacity={0} /></linearGradient></defs>
+                    <CartesianGrid vertical={false} stroke="#E3E1F5" />
+                    <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={11} stroke="#6E6A94" interval="preserveStartEnd" minTickGap={30} />
+                    <YAxis tickLine={false} axisLine={false} fontSize={11} stroke="#6E6A94" width={52} tickFormatter={(v) => (v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${v}`)} />
+                    <Tooltip formatter={(v) => money(Number(v))} contentStyle={{ borderRadius: 10, border: "1px solid #E3E1F5", fontSize: 13 }} />
+                    <Area type="monotone" dataKey="balance" name="Balance left" stroke="#3D2BFF" strokeWidth={2.5} fill="url(#g)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>

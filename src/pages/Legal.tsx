@@ -44,7 +44,7 @@ export default function Legal({ doc }: { doc: "terms" | "privacy" | "refunds" })
     <div className="min-h-screen">
       <header className="mx-auto max-w-3xl px-5 py-6"><Logo /></header>
       <main className="mx-auto max-w-3xl px-5 pb-20">
-        <h1 className="font-display text-4xl font-semibold">{d.title}</h1>
+        <h1 className="font-display text-5xl">{d.title}</h1>
         <p className="mt-2 text-sm text-ink-mute">Last updated {UPDATED}</p>
         <div className="mt-10 space-y-8">
           {d.sections.map(([h, body]) => (
