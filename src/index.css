@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "tnum" 1, "cv11" 1;
+  }
+  h1, h2, h3 { @apply text-ink; letter-spacing: -0.015em; }
+  :focus-visible { @apply outline-none ring-2 ring-vital-500 ring-offset-2 ring-offset-paper; }
+  ::selection { background: #CFEBDB; }
+}
+
+@layer components {
+  .num { font-variant-numeric: tabular-nums; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-mute; }
+  .input {
+    @apply w-full rounded-lg border border-paper-line bg-white px-3 py-2 text-sm text-ink
+      placeholder:text-ink-mute/70 transition focus:border-vital-500 focus:ring-2 focus:ring-vital-100 focus:outline-none;
+  }
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgba(14,26,22,.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14,26,22,.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
