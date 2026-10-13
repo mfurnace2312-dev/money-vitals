@@ -66,7 +66,7 @@ export default function Landing() {
         </header>
 
         <main id="main" className="relative z-10 mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-16">
-          <h1 className="max-w-4xl font-display text-[64px] sm:text-[104px] lg:text-[128px]">
+          <h1 className="max-w-4xl font-display text-[64px] text-white sm:text-[104px] lg:text-[128px]">
             Your money has a pulse.
           </h1>
           <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
