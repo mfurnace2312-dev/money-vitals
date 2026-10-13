@@ -84,10 +84,6 @@ export default function Landing() {
 
         <div className="relative z-0 mt-10 h-28 sm:mt-14 sm:h-36" aria-hidden>
           <Ecg draw className="h-full w-full text-white" width={3.5} />
-          <span className="absolute right-[27%] top-1/2 hidden h-3 w-3 -translate-y-1/2 sm:block">
-            <span className="absolute inset-0 animate-beat rounded-full bg-gold-400" style={{ animationDelay: "1.8s" }} />
-            <span className="absolute inset-0 rounded-full bg-gold-400" />
-          </span>
         </div>
         <Monitor />
         <p className="mx-auto mt-4 max-w-5xl px-5 text-xs text-white/50 sm:px-8">Sample readings. Your dashboard calculates from the numbers you enter or sync.</p>

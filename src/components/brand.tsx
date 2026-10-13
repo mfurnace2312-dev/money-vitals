@@ -25,7 +25,7 @@ export function Ecg({ className, draw, color = "currentColor", width = 3 }: { cl
   return (
     <svg viewBox="0 0 640 112" preserveAspectRatio="none" className={className} aria-hidden>
       <path d={d} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke"
-        className={draw ? "ecg animate-draw" : undefined} style={draw ? ({ "--len": 1400 } as React.CSSProperties) : undefined} pathLength={draw ? 1400 : undefined} />
+        className={draw ? "ecg animate-draw" : undefined} style={draw ? ({ "--len": 4000 } as React.CSSProperties) : undefined} />
     </svg>
   );
 }
