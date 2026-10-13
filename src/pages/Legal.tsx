@@ -22,6 +22,7 @@ const DOCS: Record<string, { title: string; sections: [string, string][] }> = {
       ["What we collect", "Your email address, the financial figures you enter (income, bills, debts, goals and similar), and basic usage logs needed to run the service."],
       ["How it's protected", "Your records are stored in a database that enforces row-level security, so each account can only ever read its own data. Connections are encrypted."],
       ["AI processing", "When you use the AI advisor, a summary of your figures is sent from our server to our AI provider to generate an answer. It isn't used to train their models and isn't sold."],
+      ["Bank connections", "If you link a bank, the connection runs through Plaid. You sign in to your bank inside Plaid's secure window — we never see your bank password. We store transactions and balances so the app can calculate your numbers, and you can disconnect at any time."],
       ["Payments", "Payments are handled by Stripe. We never see or store your full card number."],
       ["What we never do", "We don't sell your personal or financial information."],
       ["Your choices", "You can edit or delete your records at any time, and you can ask us to delete your account by contacting support."],

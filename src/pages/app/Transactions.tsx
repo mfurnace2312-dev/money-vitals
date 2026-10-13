@@ -5,6 +5,7 @@ import { usePlan } from "@/hooks/usePlan";
 import { useToast } from "@/components/toast";
 import { RecordForm, type FieldDef } from "@/components/RecordForm";
 import { UpgradeGate } from "@/components/UpgradeGate";
+import { BankConnections } from "@/components/BankConnections";
 import { Button, Card, CardHeader, Empty, Input, PageHeader, Spinner, cx } from "@/components/ui";
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES, money, thisMonth, yearToDate, type Transaction } from "@/lib/finance";
 
@@ -107,6 +108,8 @@ export default function Transactions() {
           </>
         } />
 
+      <BankConnections />
+
       <UpgradeGate need="plus" feature="Year-to-date analytics and CSV import/export">
         <Card>
           <CardHeader title={`${year} so far`} sub="From your monthly budgets, bills, debts and goals" />
@@ -132,7 +135,7 @@ export default function Transactions() {
             {list.slice(0, 300).map((t) => (
               <li key={t.id}><button onClick={() => setEditing(t)} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left hover:bg-paper/50 sm:px-6">
                 <div className="min-w-0">
-                  <div className="truncate text-sm font-medium">{t.description}</div>
+                  <div className="flex items-center gap-1.5 truncate text-sm font-medium">{t.description}{t.pending && <span className="rounded bg-ink/5 px-1.5 text-[10px] font-semibold text-ink-mute">Pending</span>}</div>
                   <div className="text-xs text-ink-mute">{new Date(t.date + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })} · {t.category}{t.account ? ` · ${t.account}` : ""}</div>
                 </div>
                 <span className={cx("num shrink-0 text-sm font-semibold", t.type === "income" && "text-vital-600")}>{t.type === "income" ? "+" : "−"}{money(Number(t.amount), 2)}</span>

@@ -13,6 +13,7 @@ Personal finance command center: monthly budget, bills, debt payoff planner with
 | Netlify functions (`netlify/functions/`) | Server code: AI advisor, Stripe checkout, Stripe billing portal, Stripe webhook |
 | Stripe | Plus ($10/mo) and Premium ($20/mo) subscriptions |
 | OpenAI (ChatGPT) | The AI advisor |
+| Plaid | Bank linking — imports transactions and balances (Plus and Premium) |
 
 Every push to `main` on GitHub deploys automatically to Netlify.
 
@@ -31,6 +32,10 @@ Every push to `main` on GitHub deploys automatically to Netlify.
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API Keys → secret / service_role key. **Server only.** |
 | `OPENAI_API_KEY` | platform.openai.com → API keys |
 | `OPENAI_MODEL` (optional) | Defaults to `gpt-6-luna`; set to another model ID to switch |
+| `PLAID_CLIENT_ID` | Plaid dashboard → Developers → Keys |
+| `PLAID_SECRET` | Plaid dashboard → Developers → Keys → production secret. **Server only.** |
+| `PLAID_ENV` | `production` (or `sandbox` for testing) |
+| `PLAID_REDIRECT_URI` | `https://<site>/plaid-oauth` — must also be added under Plaid dashboard → Developers → API → Allowed redirect URIs |
 | `STRIPE_SECRET_KEY` | Stripe → Developers → API keys |
 | `STRIPE_PLUS_PRICE_ID` / `STRIPE_PREMIUM_PRICE_ID` | Stripe → Product catalog → each plan's monthly price ID (`price_…`) |
 | `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → endpoint `https://<site>/api/public/payments/webhook` → signing secret |

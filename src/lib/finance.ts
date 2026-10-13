@@ -23,7 +23,7 @@ export type Asset = { id: string; name: string; category: string; value: number 
 export type Liability = { id: string; name: string; category: string; amount: number };
 export type Transaction = {
   id: string; date: string; description: string; merchant: string | null; category: string; amount: number;
-  account: string | null; type: string; recurring: boolean; notes: string | null;
+  account: string | null; type: string; recurring: boolean; notes: string | null; source?: string; pending?: boolean;
 };
 export type Subscription = { id: string; name: string; price: number; frequency: string; next_payment: string | null; category: string };
 export type Benchmark = { id: string; category: string; low_amount: number; high_amount: number; region: string; source: string; as_of: string };

@@ -23,6 +23,7 @@ const Advisor = lazy(() => import("@/pages/app/Advisor"));
 const Billing = lazy(() => import("@/pages/app/Billing"));
 const SettingsPage = lazy(() => import("@/pages/app/Settings"));
 const Legal = lazy(() => import("@/pages/Legal"));
+const PlaidOAuth = lazy(() => import("@/pages/app/PlaidOAuth"));
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
@@ -99,6 +100,7 @@ export default function App() {
                 <Route path="/advisor" element={<Advisor />} />
                 <Route path="/billing" element={<Billing />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/plaid-oauth" element={<PlaidOAuth />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
