@@ -1,4 +1,3 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { adminClient, env, handleError, json, planFor, requireUser } from "../lib/server";
 import { advisorSnapshot, EMPTY_DATA, type FinanceData } from "../../src/lib/finance";
 
@@ -43,17 +42,29 @@ export default async (req: Request) => {
 
     const { data: history } = await db.from("ai_messages").select("role,content").eq("user_id", user.id).order("created_at", { ascending: false }).limit(10);
     const past = (history ?? []).reverse().map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
-    // The API needs the conversation to start with a user turn.
-    while (past.length && past[0].role !== "user") past.shift();
 
-    const anthropic = new Anthropic({ apiKey: env("ANTHROPIC_API_KEY") });
-    const res = await anthropic.messages.create({
-      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5",
-      max_tokens: 900,
-      system: `${SYSTEM}\n\n<snapshot>\n${JSON.stringify(snapshot)}\n</snapshot>`,
-      messages: [...past, { role: "user", content: message }],
+    // OpenAI Chat Completions (ChatGPT). Model can be changed with the OPENAI_MODEL setting.
+    const ai = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${env("OPENAI_API_KEY")}` },
+      body: JSON.stringify({
+        model: process.env.OPENAI_MODEL || "gpt-6-luna",
+        max_completion_tokens: 900,
+        messages: [
+          { role: "system", content: `${SYSTEM}\n\n<snapshot>\n${JSON.stringify(snapshot)}\n</snapshot>` },
+          ...past,
+          { role: "user", content: message },
+        ],
+      }),
     });
-    const reply = res.content.map((b) => (b.type === "text" ? b.text : "")).join("").trim() || "I couldn't come up with an answer. Try rephrasing the question.";
+    const out = (await ai.json().catch(() => null)) as { choices?: { message?: { content?: string } }[]; error?: { message?: string } } | null;
+    if (!ai.ok) {
+      console.error("OpenAI error", ai.status, out?.error?.message);
+      if (ai.status === 401) return json(503, { error: "The advisor isn't connected yet. The site owner needs to check the OpenAI key." });
+      if (ai.status === 429) return json(503, { error: "The advisor is busy right now. Please try again in a minute." });
+      return json(502, { error: "The advisor couldn't answer just now. Please try again." });
+    }
+    const reply = out?.choices?.[0]?.message?.content?.trim() || "I couldn't come up with an answer. Try rephrasing the question.";
 
     await db.from("ai_messages").insert([
       { user_id: user.id, role: "user", content: message },
